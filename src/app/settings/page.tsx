@@ -91,6 +91,17 @@ export default function SettingsPage() {
           </div>
 
           <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-gray-400">Browser alerts</span>
+              <a
+                href="https://support.google.com/chrome/answer/3220216"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-green-700 hover:underline"
+              >
+                Go to browser settings
+              </a>
+            </div>
             {draft && TOGGLES.map(({ label, key, note }) => (
               <label
                 key={key}
