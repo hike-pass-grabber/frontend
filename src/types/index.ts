@@ -17,6 +17,7 @@ export interface Booking {
   id: string;
   user_id: string;
   hike_id: string;
+  hike_name: string | null;
   hike_date: string;
   party_size: number;
   num_passes: number;

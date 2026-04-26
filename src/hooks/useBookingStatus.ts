@@ -8,7 +8,7 @@ export function useBookingStatus() {
   const ref = useRef<ReturnType<typeof setInterval> | null>(null);
 
   function refresh() {
-    api.get<Booking[]>("/bookings").then(setBookings).catch(() => {});
+    api.get<Booking[]>("/bookings/").then(setBookings).catch(() => {});
   }
 
   useEffect(() => {

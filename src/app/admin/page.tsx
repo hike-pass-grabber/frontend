@@ -16,11 +16,14 @@ export default function AdminPage() {
   }
 
   useEffect(() => {
+    if (!loading && (!user || user.role !== "admin")) router.push("/");
+  }, [loading, user, router]);
+
+  useEffect(() => {
     if (user?.role === "admin") loadUsers();
   }, [user]);
 
-  if (loading) return null;
-  if (!user || user.role !== "admin") { router.push("/"); return null; }
+  if (loading || !user || user.role !== "admin") return <div className="flex justify-center items-center h-screen"><div className="w-8 h-8 border-4 border-green-600 border-t-transparent rounded-full animate-spin" /></div>;
 
   async function setRole(userId: string, role: string) {
     await api.patch(`/users/${userId}/role?role=${role}`);
@@ -49,20 +52,12 @@ export default function AdminPage() {
                   <p className="font-medium text-sm">{u.name}</p>
                   <p className="text-xs text-gray-400">{u.email}</p>
                 </div>
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => setRole(u.id, "hiker")}
-                    className="bg-green-600 text-white px-3 py-1 rounded text-xs hover:bg-green-700"
-                  >
-                    Approve
-                  </button>
-                  <button
-                    onClick={() => setRole(u.id, "unauthorized")}
-                    className="bg-gray-100 text-gray-600 px-3 py-1 rounded text-xs hover:bg-gray-200"
-                  >
-                    Reject
-                  </button>
-                </div>
+                <button
+                  onClick={() => setRole(u.id, "hiker")}
+                  className="bg-green-600 text-white px-3 py-1 rounded text-xs hover:bg-green-700"
+                >
+                  Approve
+                </button>
               </div>
             ))}
           </div>
@@ -93,6 +88,11 @@ export default function AdminPage() {
                   {u.role !== "admin" && u.id !== user.id && (
                     <button onClick={() => setRole(u.id, "admin")} className="text-blue-500 hover:underline text-xs">
                       Make admin
+                    </button>
+                  )}
+                  {u.role === "admin" && u.id !== user.id && (
+                    <button onClick={() => setRole(u.id, "hiker")} className="text-orange-500 hover:underline text-xs">
+                      Demote to hiker
                     </button>
                   )}
                 </td>
