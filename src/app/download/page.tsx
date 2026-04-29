@@ -16,29 +16,21 @@ export default function DownloadPage() {
             <h2 className="font-semibold text-gray-700 mb-1">Requirements</h2>
             <ul className="text-sm text-gray-500 list-disc list-inside space-y-1">
               <li>Google Chrome must be installed</li>
-              <li>Windows 10/11 or macOS</li>
+              <li>Windows 10/11</li>
               <li>Must be signed in to the same account as the web app</li>
             </ul>
           </div>
 
           <div>
             <h2 className="font-semibold text-gray-700 mb-3">Download</h2>
-            <div className="space-y-2">
-              <a
-                href="https://github.com/hike-pass-grabber/local/releases/latest/download/hike-grabber.exe"
-                className="flex items-center justify-between bg-green-700 text-white px-4 py-3 rounded-lg hover:bg-green-800 text-sm"
-              >
-                <span>Windows (.exe)</span>
-                <span className="opacity-75">↓</span>
-              </a>
-              <a
-                href="https://github.com/hike-pass-grabber/local/releases/latest/download/hike-grabber.app"
-                className="flex items-center justify-between bg-green-700 text-white px-4 py-3 rounded-lg hover:bg-green-800 text-sm"
-              >
-                <span>macOS (.app)</span>
-                <span className="opacity-75">↓</span>
-              </a>
-            </div>
+            <a
+              href="/hike-grabber.exe"
+              download
+              className="flex items-center justify-between bg-green-700 text-white px-4 py-3 rounded-lg hover:bg-green-800 text-sm"
+            >
+              <span>Windows (.exe)</span>
+              <span className="opacity-75">↓</span>
+            </a>
           </div>
 
           <div>
