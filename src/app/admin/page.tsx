@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { NavBar } from "@/components/NavBar";
 import { useAuth } from "@/hooks/useAuth";
 import { api } from "@/lib/api";
+import { LoadingScreen } from "@/components/LoadingScreen";
 import type { User } from "@/types";
 
 export default function AdminPage() {
@@ -23,7 +24,7 @@ export default function AdminPage() {
     if (user?.role === "admin") loadUsers();
   }, [user]);
 
-  if (loading || !user || user.role !== "admin") return <div className="flex justify-center items-center h-screen"><div className="w-8 h-8 border-4 border-green-600 border-t-transparent rounded-full animate-spin" /></div>;
+  if (loading || !user || user.role !== "admin") return <LoadingScreen />;
 
   async function setRole(userId: string, role: string) {
     await api.patch(`/users/${userId}/role?role=${role}`);

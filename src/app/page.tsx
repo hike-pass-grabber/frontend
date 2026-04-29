@@ -10,6 +10,7 @@ import { EditHikeModal } from "@/components/EditHikeModal";
 import { DeleteHikeModal } from "@/components/DeleteHikeModal";
 import { useAuth } from "@/hooks/useAuth";
 import { useHikes } from "@/hooks/useHikes";
+import { LoadingScreen } from "@/components/LoadingScreen";
 import type { Hike } from "@/types";
 
 export default function HomePage() {
@@ -26,7 +27,7 @@ export default function HomePage() {
     if (!loading && !user) router.push("/login");
   }, [loading, user, router]);
 
-  if (loading || !user) return <div className="flex justify-center items-center h-screen"><div className="w-8 h-8 border-4 border-green-600 border-t-transparent rounded-full animate-spin" /></div>;
+  if (loading || !user) return <LoadingScreen />;
 
   if (user.role === "unauthorized") {
     return (

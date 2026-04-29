@@ -8,6 +8,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useBookingStatus } from "@/hooks/useBookingStatus";
 import { useLocalStatus } from "@/hooks/useLocalStatus";
 import { api } from "@/lib/api";
+import { LoadingScreen } from "@/components/LoadingScreen";
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -19,7 +20,7 @@ export default function DashboardPage() {
     if (!loading && !user) router.push("/login");
   }, [loading, user, router]);
 
-  if (loading || !user) return <div className="flex justify-center items-center h-screen"><div className="w-8 h-8 border-4 border-green-600 border-t-transparent rounded-full animate-spin" /></div>;
+  if (loading || !user) return <LoadingScreen />;
 
   const active = bookings.find(b => b.status === "polling" || b.status === "available");
 

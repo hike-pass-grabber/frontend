@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { NavBar } from "@/components/NavBar";
 import { useAuth } from "@/hooks/useAuth";
 import { api } from "@/lib/api";
+import { LoadingScreen } from "@/components/LoadingScreen";
 import type { AlertPreference } from "@/types";
 
 type BoolKey = "email_enabled" | "sms_enabled" | "sound_enabled" | "popup_enabled";
@@ -36,7 +37,7 @@ export default function SettingsPage() {
     }).catch(() => {});
   }, [user]);
 
-  if (loading || !user) return <div className="flex justify-center items-center h-screen"><div className="w-8 h-8 border-4 border-green-600 border-t-transparent rounded-full animate-spin" /></div>;
+  if (loading || !user) return <LoadingScreen />;
 
   function handleToggle(key: BoolKey) {
     if (!draft) return;
